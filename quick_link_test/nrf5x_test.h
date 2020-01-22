@@ -26,9 +26,7 @@
 
 #define IS_B1_PRESS  !(nrf_gpio_pin_read(BUTTON_1))
 #define IS_B2_PRESS  !(nrf_gpio_pin_read(BUTTON_2))
-#define IS_LED1_ON   !(nrf_gpio_pin_read(LED_1))
-#define IS_LED2_ON   !(nrf_gpio_pin_read(LED_2))
-#define IS_LED3_ON   !(nrf_gpio_pin_read(LED_3))
+
 																
 
 typedef void (*callback_t)(nrf_esb_evt_t const *);    //callback function for esb handler

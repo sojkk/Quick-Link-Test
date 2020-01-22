@@ -35,7 +35,7 @@
 #include "boards.h"
 #include "nrf_delay.h"
 
-
+static uint8_t test_results[] = {0, 0, 0};
 
 /*****************************************************************************/
 /**
@@ -79,25 +79,40 @@ static void app_ptx_prod_test(void)
 	
 	 //i = test_nrf5x_ptx_per_test(LO_CH);
 	
-   if(test_nrf5x_ptx_per_test(LO_CH) > (PT_COM_PACKAGES-PT_LOST_PKT) )  nrf_gpio_pin_clear(LED_1);
+   if(test_nrf5x_ptx_per_test(LO_CH) > (PT_COM_PACKAGES-PT_LOST_PKT) )  
+	 {	 
+			nrf_gpio_pin_clear(LED_1);
+		 
+		  test_results[0] = 1;
 	
+	 }
 	 nrf_delay_ms(1);                         
 	
 	 if(test_nrf5x_ptx_hop_channel(MID_CH))   
 	 {
       nrf_delay_ms(4);      // Delay 4ms to wait for PRX steady
 		  //i = test_nrf5x_ptx_per_test(MID_CH);
-		  if(test_nrf5x_ptx_per_test(MID_CH) > (PT_COM_PACKAGES-PT_LOST_PKT) )  nrf_gpio_pin_clear(LED_2);
+		  if(test_nrf5x_ptx_per_test(MID_CH) > (PT_COM_PACKAGES-PT_LOST_PKT) )  
+			{	
+					nrf_gpio_pin_clear(LED_2);
+				  test_results[1] = 1;
+			}
    }		
 
    if(test_nrf5x_ptx_hop_channel(HI_CH))   
 	 {
       nrf_delay_ms(4);      // Delay 4ms to wait for PRX steady
-		  if(test_nrf5x_ptx_per_test(HI_CH) > (PT_COM_PACKAGES-PT_LOST_PKT) )  nrf_gpio_pin_clear(LED_3);
+		  if(test_nrf5x_ptx_per_test(HI_CH) > (PT_COM_PACKAGES-PT_LOST_PKT) )  
+			{	
+					nrf_gpio_pin_clear(LED_3);
+				  test_results[2] =1;
+			}   
    }		 	 
 	 
 	 test_nrf5x_ptx_hop_channel(LO_CH);
 }
+
+
 
 /*****************************************************************************/
 /**
@@ -109,6 +124,7 @@ int main()
 {
 	  uint8_t  i,loop_cnt;
     bool     all_fail;
+			
  
     loop_cnt=0;
     all_fail=0;
@@ -121,9 +137,11 @@ int main()
     {
         if(IS_B1_PRESS)
 				{
-             all_fail = false;
+					  test_results[0] = test_results[1] = test_results[2] = 0;
+						all_fail = false;
 					   app_ptx_prod_test();
-					   if ( !(IS_LED1_ON | IS_LED2_ON | IS_LED3_ON) )   	
+ 
+						 if (! (test_results[0] | test_results[1] | test_results[2]) )
 				     {
                 all_fail = true;
              }					
