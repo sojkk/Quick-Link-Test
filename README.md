@@ -21,3 +21,7 @@ The Purposes of writing this code are:
 - Small firmware footprint on the DUT (PRX) side
 
 - Program size (bytes) built with Keil uvision 5: Code =3780, RO-data =224, RW-data =152, ZI-data = 2864
+
+##Example code
+-The attached demo code works on nRF5 SDK v15.3.0
+-Put the folder "quick_link_test" under /examples/proprietary_rf/ to build.
