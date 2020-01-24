@@ -25,3 +25,7 @@ The Purposes of writing this code are:
 ## Example code
 - The attached demo code works on nRF5 SDK v12.3.0 and v15.3.0 .
 - Put the folder "quick_link_test-<sdk version>" under /examples/proprietary_rf/ to build.
+
+## Further readings 
+
+https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/quick-link-test-for-pcba-with-nordic-chips?CommentId=76e094e7-a042-4bff-9e3a-123bd9fb6493
